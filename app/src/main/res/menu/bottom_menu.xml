@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <item
+        android:id="@+id/horoscopoFragment"
+        android:icon="@drawable/ic_horoscopo"
+        android:title="@string/horoscope"></item>
+    <item
+        android:id="@+id/luckFragment"
+        android:icon="@drawable/ic_cards"
+        android:title="@string/luck"></item>
+    <item
+        android:id="@+id/palmistryFragment"
+        android:icon="@drawable/ic_hand"
+        android:title="@string/palmistry"></item>
 </menu>
