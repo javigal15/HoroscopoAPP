@@ -23,6 +23,7 @@
 
     <!--    Luck-->
     <string name="share">Share</string>
+    <string name="swipe">Desliza</string>
 
     <string name="luck_0">"A new opportunity will bring unexpected success your way."</string>
     <string name="luck_1">"You'll meet someone who will change your life for the better."</string>
