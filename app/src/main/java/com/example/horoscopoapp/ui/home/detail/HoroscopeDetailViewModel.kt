@@ -13,7 +13,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class HoroscopeDetailViewModel @Inject constructor(private val GetPrediction: GetPrediction) :
+class HoroscopeDetailViewModel @Inject constructor(private val getPrediction: GetPrediction) :
     ViewModel() {
 
     private var _state = MutableStateFlow<HoroscopeDetailState>(HoroscopeDetailState.Loading)
@@ -25,7 +25,7 @@ class HoroscopeDetailViewModel @Inject constructor(private val GetPrediction: Ge
         horoscope = sign
         viewModelScope.launch {
             _state.value = HoroscopeDetailState.Loading
-            val result = withContext(Dispatchers.IO) { GetPrediction(sign.name) } // Hilo secundario
+            val result = withContext(Dispatchers.IO) { getPrediction(sign.name) }
             if (result != null) {
                 _state.value =
                     HoroscopeDetailState.Success(result.horoscope, result.sign, horoscope)

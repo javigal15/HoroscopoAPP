@@ -5,7 +5,6 @@ import com.example.horoscopoapp.domain.model.Repository
 import javax.inject.Inject
 
 class GetPrediction @Inject constructor(private val repository: Repository) {
-    suspend operator fun invoke(sign: String): PredictionModel? {
-        return repository.getPrediction(sign)
-    }
+
+    suspend operator fun invoke(sign: String) = repository.getPrediction(sign)
 }
