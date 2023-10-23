@@ -1,6 +1,8 @@
 package com.example.horoscopoapp.ui.home.luck
 
 import android.animation.ObjectAnimator
+import android.content.Intent
+import android.media.Image
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,19 +12,27 @@ import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.DecelerateInterpolator
+import android.widget.ImageView
+import androidx.activity.OnBackPressedCallback
+import androidx.cardview.widget.CardView
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import com.example.horoscopoapp.R
 import com.example.horoscopoapp.databinding.FragmentLuckBinding
+import com.example.horoscopoapp.ui.home.providers.RandomCardProvider
 import com.google.gson.internal.bind.ObjectTypeAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Random
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LuckFragment : Fragment() {
 
     private var _binding: FragmentLuckBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var randomCardView: RandomCardProvider
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,6 +41,28 @@ class LuckFragment : Fragment() {
 
     private fun initUI() {
         initListeners()
+        initPrediction()
+    }
+
+    private fun initPrediction() {
+        val currentLuck = randomCardView.getLucky()
+        currentLuck?.let { luck ->
+            val currentPrediction = getString(luck.text)
+            binding.tvLucky.text = currentPrediction
+            binding.ivLuckyCard.setImageResource(luck.image)
+            binding.tvShare.setOnClickListener { shareResult(currentPrediction) }
+        }
+    }
+
+    private fun shareResult(prediction: String) {
+        val sendIntent: Intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, prediction)
+            type = "text/plain"
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null)
+        startActivity(shareIntent)
     }
 
     private fun initListeners() {

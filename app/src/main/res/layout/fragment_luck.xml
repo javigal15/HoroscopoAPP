@@ -69,15 +69,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible">
 
+
         <ImageView
             android:id="@+id/ivLuckyCard"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:src="@drawable/card_devil"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_percent="0.6"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/card_devil">
 
         </ImageView>
 
